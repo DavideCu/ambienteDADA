@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DADA - Spazi di Apprendimento Attivo</title>
+    <style>
+        /* --- TEMA CROMATICO E TIPOGRAFIA --- */
+        :root {
+            --bg-site: #fdfbf7;
+            --bg-card: #ffffff;
+            --primary: #2c3e50;
+            --accent: #d35400;
+            --accent-light: #fdf2e9;
+            --text-main: #34495e;
+            --text-light: #7f8c8d;
+            --border: #eaeded;
+            --success-bg: #e8f8f5;
+            --success-text: #117a65;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-site);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- NAVBAR STICKY --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin-top: 60px;
+            padding: 60px 20px;
+            background-color: #f4f1ea;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin: 0 auto 30px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            max-height: 480px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 6px solid #ffffff;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- STRUTTURA CONTENUTI --- */
+        .main-container {
+            max-width: 1140px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-main);
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* --- IMMAGINI TOOLKIT --- */
+        .toolkit-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            margin: 25px 0;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        /* --- ARCHETIPI GRID --- */
+        .archetipo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .archetipo-card {
+            background-color: #fdfbf7;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .archetipo-card h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- TABELLA BLUEPRINT --- */
+        .blueprint-table-wrapper {
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* --- DOWNLOAD BOXES --- */
+        .download-container {
+            background-color: var(--success-bg);
+            border: 1px dashed var(--success-text);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .download-text h4 {
+            color: var(--success-text);
+            margin-bottom: 5px;
+        }
+
+        .download-text p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .download-btn {
+            background-color: var(--success-text);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #0e6251;
+        }
+
+        /* --- BLOCCO EMAIL COPIA/INCOLLA --- */
+        .email-template {
+            background-color: #f8f9f9;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            font-family: Courier, monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        /* --- SEZIONE CONTATTI --- */
+        .profile-box {
+            background-color: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .profile-header h3 {
+            margin: 0;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+
+        .portfolio-link:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            background-color: #ffffff;
+        }
+
+        /* --- RESPONSIVE DESIGN (MOBILE) --- */
+        @media (max-width: 768px) {
+            /* Adattamento Header e Menu */
+            .nav-container { flex-direction: column; gap: 12px; padding: 12px; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            nav a { font-size: 0.9rem; padding: 6px 10px; }
+            
+            /* Il menu su più righe richiede più margine per la Hero sottostante */
+            .hero { margin-top: 120px; padding: 40px 15px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p.subtitle { font-size: 1rem; margin-bottom: 20px; }
+
+            /* Spaziature sezioni interne ridotte per non sprecare spazio su schermo piccolo */
+            section { padding: 25px 15px; margin-bottom: 30px; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.2rem; margin-top: 25px; }
+            
+            /* Griglie e Box Download */
+            .archetipo-grid { grid-template-columns: 1fr; }
+            .download-container { flex-direction: column; align-items: stretch; gap: 15px; text-align: center; }
+            .download-btn { width: 100%; text-align: center; }
+            .email-template { font-size: 0.8rem; padding: 15px; }
+            
+            /* Profilo Autore */
+            .profile-box { padding: 20px; text-align: center; }
+            .profile-header { flex-direction: column; gap: 10px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Ecosistema Co-DADA</div>
+            <nav>
+                <ul>
+                    <li><a href="#modello">Il Modello</a></li>
+                    <li><a href="#progettare">Progettare l'Ambiente</a></li>
+                    <li><a href="#produrre">Produrre gli Arredi</a></li>
+                    <li><a href="#contatti">Contatti</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-container">
+            <h1>Ripensare gli Spazi Scolastici</h1>
+            <p class="subtitle">Guida collaborativa per la trasformazione delle aule in ambienti DADA</p>
+            <div class="hero-image-wrapper">
+                <img src="https://cdn.phototourl.com/free/2026-06-11-eacabe0e-2bd7-4caa-84e6-2ccc7fdf3b87.png" alt="Laboratorio e Co-progettazione degli ambienti DADA">
+            </div>
+        </div>
+    </div>
+
+    <main class="main-container">
+
+        <section id="modello">
+            <h2>Cos'è il modello DADA</h2>
+            <p>Il modello <strong>DADA (Didattiche per Ambienti di Apprendimento)</strong> propone un radicale cambio di paradigma gestionale e pedagogico all'interno delle scuole superiori e secondarie italiane. A differenza del modello tradizionalmente applicato, in cui gli studenti rimangono fermi nella stessa aula per tutta la giornata e i professori ruotano sulle cattedre, nel modello DADA sono gli studenti a spostarsi nelle diverse aule al cambio dell'ora.</p>
+            <p>L'aula cessa di essere un mero contenitore passivo assegnato a una classe e si trasforma in un <strong>laboratorio specializzato</strong>, interamente configurato e personalizzato dal docente o dal dipartimento della disciplina. Questo continuo movimento non costituisce una distrazione, ma agisce come un fattore di riattivazione cognitiva e di stimolo alla responsabilità e all'autonomia dei ragazzi.</p>
+
+            <h3>I Principi Spaziali Fondamentali</h3>
+            <ul>
+                <li><strong>Decentramento della cattedra:</strong> La cattedra perde la sua posizione fissa e frontale per fare spazio a flussi di movimento fluidi, dove il docente assume il ruolo di facilitatore dell'apprendimento.</li>
+                <li><strong>Identità disciplinare:</strong> Lo spazio circostante deve comunicare visivamente e strutturalmente la materia insegnata.</li>
+                <li><strong>L'arredo come "Terzo Educatore":</strong> Gli oggetti e la disposizione dello spazio influenzano direttamente la postura, l'acustica, le relazioni interpersonali e le modalità di studio degli studenti.</li>
+            </ul>
+
+            <h3>La Flessibilità e i 5 Archetipi Spaziali</h3>
+            <p>Per abilitare una didattica attiva, l'arredo deve essere flessibile (modulare, leggero, su ruote o facilmente impilabile). Lo spazio viene quindi strutturato integrando cinque macro-archetipi funzionali:</p>
+            
+            <div class="archetipo-grid">
+                <div class="archetipo-card">
+                    <h4>1. L'Agorà (Plenaria)</h4>
+                    <p>Configurazione destinata ai momenti di presentazione, dibattito collettivo e condivisione democratica.</p>
+                </div>
+                <div class="archetipo-card">
+                    <h4>2. L'Isola (Lavoro cooperativo)</h4>
+                    <p>Aggregazione di tavoli modulari per piccoli gruppi, ideale per il cooperative learning e compiti di realtà.</p>
+                </div>
+                <div class="archetipo-card">
+                    <h4>3. La Tana (Decompressione)</h4>
+                    <p>Un angolo protetto acusticamente e visivamente per lo studio focalizzato o il supporto a bisogni educativi speciali (BES).</p>
+                </div>
+                <div class="archetipo-card">
+                    <h4>4. Il Laboratorio (Makerspace)</h4>
+                    <p>Aree attrezzate per la manipolazione fisica e l'applicazione laboratoriale delle competenze.</p>
+                </div>
+                <div class="archetipo-card">
+                    <h4>5. Lo Spazio di Transito</h4>
+                    <p>I corridoi diventano attivi e vengono integrati con armadietti, sedute e bacheche funzionali.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="progettare">
+            <h2>Progettare un ambiente DADA: Il Toolkit Metodologico</h2>
+            <p>Il percorso operativo di co-progettazione guida gli insegnanti a trasformare l'aula da uno spazio passivo a un vero e proprio atelier di apprendimento. I docenti agiscono in qualità di <strong>Docenti-Designer</strong> applicando la metodologia dell'<em>Human Centered Design</em> per far emergere i problemi fisici strutturali che ostacolano l'apprendimento, traducendoli in opportunità.</p>
+            
+            <img src="https://cdn.phototourl.com/free/2026-06-11-bc49f1a5-bdac-4f5d-92db-df19631e6a04.png" alt="Contesto pedagogico e introduzione al modello DADA" class="toolkit-img">
+
+            <h3>Fase 1: Preparazione e Allestimento del Kit del Facilitatore</h3>
+            <p>Questo workshop è strutturato per configurarsi come un'experience fortemente tattile e visiva. Occorre verificare sul tavolo la presenza dei seguenti strumenti operativi:</p>
+            <ul>
+                <li><strong>Strumenti di scrittura:</strong> Pennarelli a punta grossa e blocchetti di post-it colorati.</li>
+                <li><strong>Supporti cartacei in scala:</strong> Almeno 5 copie cartacee stampate in formato A3 della planimetria della propria aula sgombra.</li>
+                <li><strong>Materiali per modellazione:</strong> Fogli di cartone rigido, forbici, nastro adesivo di carta, plastilina e scovolini.</li>
+                <li><strong>Strumenti di proporzione:</strong> Un piccolo manichino snodabile in legno (scala 1:20).</li>
+            </ul>
+
+            <img src="https://cdn.phototourl.com/free/2026-06-11-6f723642-820e-4e86-bbd6-54ca06b0ae13.png" alt="Il ruolo del docente-designer e i materiali del kit" class="toolkit-img">
+
+            <h3>Fase 2: Il DNA DADA e la Mappa delle Polarità Didattiche</h3>
+            <p>Nel modello DADA, l'aula cessa di essere uno spazio generico. Prima di scegliere la conformazione dei mobili, occorre definire l'identità didattica compilando la <strong>Mappa delle Polarità Didattiche</strong>, posizionando il baricentro delle attività future (es. Studio Individuale vs Apprendimento Cooperativo).</p>
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Mappa delle Polarità Didattiche</h4>
+                    <p>Asse di valutazione metodologica per definire il DNA pedagogico dello spazio-materia.</p>
+                </div>
+                <a href="TESI/mappa_polarità.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+            <h3>Fase 3: Fase Diagnostica Architettonica (L'Audit dello Spazio)</h3>
+            <p>L'obiettivo è mappare accuratamente lo spazio fisico reale prendendo piena coscienza dei limiti strutturali e impiantistici della stanza isolando i vincoli dai potenziali:</p>
+            <ul>
+                <li><strong>VINCOLI FISSI (ROSSO):</strong> Termosifoni, raggio di apertura porte/finestre, pilastri, prese elettriche, altezza dei davanzali.</li>
+                <li><strong>POTENZIALE SPAZIALE (VERDE):</strong> Pareti "cieche" per sviluppo verticale, angoli ciechi inutilizzati, aree investite da luce naturale diretta.</li>
+            </ul>
+
+            <img src="https://cdn.phototourl.com/free/2026-06-11-366df9eb-a60b-4e1e-a475-d04cdb224795.png" alt="Analisi dei vincoli fissi e architettonici della stanza" class="toolkit-img">
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Griglia Planimetrica per il Rilievo (Prima stesura)</h4>
+                    <p>Base millimetrata per mappare graficamente la checklist dei vincoli rossi e verdi.</p>
+                </div>
+                <a href="TESI/griglia_planimetrica.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+            <h3>Fase 4: Fase Diagnostica Ergonomica (Empathy Map dello Studente)</h3>
+            <p>Sulla base della viva esperienza d'aula, i docenti si focalizzano sul punto di vista fisico, posturale e sensoriale di un alunno: cosa vede? Cosa percepisce a livello acustico? Quali sono le frizioni posturali?</p>
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Empathy Map dello Studente</h4>
+                    <p>Scheda di immedesimazione per rilevare i pain points ergonomici e di comfort visivo/acustico.</p>
+                </div>
+                <a href="TESI/empathy_map.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+            <h3>Fase 5: Sintesi dei Requisiti (Activity-Friction Blueprint)</h3>
+            <p>Questa fase costituisce il vero motore metodologico del percorso. Non bisogna mai descrivere un elemento d'arredo partendo dalla sua forma estetica, ma dalle azioni che lo spazio deve abilitare. Connettendo in tempo reale le fasi della lezione, ogni criticità spaziale viene isolata e trasformata in un requisito tecnico (<strong>Gain</strong>).</p>
+
+            <div class="blueprint-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fasi Lezione</th>
+                            <th>Azione Docente/Studente</th>
+                            <th>Frizione (Pain Point)</th>
+                            <th>Requisiti Arredo (Gain)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lancio / Plenaria</strong></td>
+                            <td>Il docente introduce la sfida o l'argomento alla classe.</td>
+                            <td>I banchi in fila ostacolano la vista, chi è in fondo perde l'attenzione.</td>
+                            <td>Archetipo Agorà: sedute a gradinata, semicerchio, visione libera senza ostacoli.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lavoro di Gruppo</strong></td>
+                            <td>Gli studenti collaborano e manipolano materiali o usano device.</td>
+                            <td>Mancanza di spazio sul piano, sedie fisse che intralciano la comunicazione.</td>
+                            <td>Archetipo Isola: banchi ampi e modulari, sedute su ruote, superfici riscrivibili.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Decompressione / BES</strong></td>
+                            <td>Studio individuale focalizzato o necessità di pausa sensoriale.</td>
+                            <td>Sovraccarico acustico e visivo, impossibilità di isolarsi dal gruppo.</td>
+                            <td>Archetipo Tana: angoli acusticamente isolati, pannelli divisori fonoassorbenti.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <img src="https://cdn.phototourl.com/free/2026-06-11-c9275a6e-2cc8-40e8-9854-9962caf99618.png" alt="Compilazione della matrice Activity-Friction Blueprint" class="toolkit-img">
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Activity-Friction Blueprint</h4>
+                    <p>La matrice metodologica definitiva per convertire le frizioni d'aula in requisiti funzionali.</p>
+                </div>
+                <a href="TESI/friction_blueprint.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+            <h3>Fase 6: Specifiche Arredi e Layout Finali</h3>
+            <p>Una volta tradotti i problemi in requisiti chiari tramite il Blueprint, si passa alla fase esecutiva. L'obiettivo qui è definire le schede tecniche degli oggetti e testarne l'ingombro reale all'interno dello spazio, per evitare colli di bottiglia o disposizioni caotiche.</p>
+            
+            <p><strong>La Scheda Specifiche Arredi:</strong> Per ciascun elemento immaginato, dovrete compilare questo documento inserendo il nome dell'oggetto, l'archetipo DADA di riferimento, le specifiche tecniche indispensabili (es. "ruote frenanti", "ganci laterali", "altezza regolabile") e un primo schizzo geometrico di massima.</p>
+            
+            <p><strong>La Griglia Planimetrica (Seconda Stesura per Layout):</strong> Utilizzando una nuova stampa della griglia planimetrica e tenendo conto dei vincoli strutturali (i segni rossi) tracciati durante la Fase 3, proverete a posizionare gli ingombri in scala dei nuovi arredi. Potete usare ritagli di carta per simulare le configurazioni: in questo modo verificherete se la trasformazione tra l'<em>Agorà</em> per la plenaria e l'<em>Isola</em> per i gruppi avviene in modo fluido e rispettando le via di fuga.</p>
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Scheda Specifiche Arredi</h4>
+                    <p>Modulo tecnico finale per definire gli archetipi spaziali scelti, gli accessori richiesti e lo schizzo.</p>
+                </div>
+                <a href="TESI/arredi.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+            <div class="download-container">
+                <div class="download-text">
+                    <h4>Griglia Planimetrica (Seconda Stesura Layout)</h4>
+                    <p>Utilizzate questa seconda copia pulita per disegnare la disposizione degli arredi e verificare gli ingombri.</p>
+                </div>
+                <a href="TESI/griglia_planimetrica_layout.pdf" download class="download-btn">Scarica PDF</a>
+            </div>
+
+        </section>
+
+        <section id="produrre">
+            <h2>Come produrre gli arredi</h2>
+            <p>Una volta definiti i requisiti degli arredi tramite il Brief, il <strong>Kit di Alleanza Locale</strong> guida la scuola nella ricerca e nel collegamento attivo dei professionisti del territorio per attivare una produzione cooperativa a chilometro zero. L'obiettivo è unire due competenze:</p>
+            <ul>
+                <li><strong>Il Laboratorio Digitale (FabLab / Maker Space):</strong> Reperibile mappando sul territorio termini come <em>"FabLab", "Taglio Laser" o "Stampa 3D"</em>. Ha il compito di sviluppare i disegni vettoriali al computer e sagomare i pannelli di legno con frese CNC.</li>
+                <li><strong>L'Artigiano Falegname:</strong> Individuabile tramite ricerche locali (<em>"Falegnameria", "Arredi su misura"</em>). Fornisce l'esperienza manuale insostituibile sulle finiture e la scelta di vernici protettive rigorosamente atossiche.</li>
+            </ul>
+
+            <h3>Il Messaggio di Contatto per i Partner</h3>
+            <p>Si raccomanda di inserire i contatti di entrambi i professionisti in copia alla stessa email, utilizzando il seguente modello:</p>
+
+            <div class="email-template">Oggetto: Proposta di collaborazione retribuita per arredi scolastici
+
+Gentili [Nome FabLab] e [Nome Falegnameria],
+
+Vi scrivo dall'Istituto [Nome Scuola]. Stiamo rinnovando le nostre aule per renderle più flessibili e adatte a una didattica attiva. Abbiamo un'idea chiara di ciò che ci serve (trovate il nostro progetto in allegato).
+
+Vi stiamo contattando insieme perché vorremmo che questo lavoro fosse una collaborazione a chilometro zero. Ci piacerebbe unire le vostre forze: la tecnologia digitale e il disegno del [Nome FabLab] con l'esperienza manuale e la cura dei materiali di [Nome Falegnameria].
+
+Saremmo felici di invitarvi qui a scuola per un caffè. Potrete vedere gli spazi di persona e potremo capire insieme se vi va di formare una squadra per questo progetto.
+
+Cosa ne pensate?
+
+Un cordiale saluto,
+[Tuo Nome / Ruolo]
+[Contatti della Scuola]</div>
+
+            <h3>Le Buone Pratiche Post-Incontro</h3>
+            <p>Se il primo incontro si conclude positivamente, procedete secondo tre regole semplici:</p>
+            <ol>
+                <li><strong>Richiedi una proposta condivisa:</strong> Spingi il FabLab e l'Artigiano a coordinarsi per presentare un unico progetto esecutivo coordinato e un solo preventivo integrato.</li>
+                <li><strong>Parti dal pezzo di prova:</strong> Non avviare la produzione in serie. Fai realizzare un singolo prototipo pilota per testarne l'ergonomia reale direttamente in classe insieme agli studenti.</li>
+                <li><strong>Fissa tre scadenze chiare:</strong> Condividi un cronoprogramma vincolante per: consegna dei disegni, consegna del pezzo di prova a scuola e montaggio finale.</li>
+            </ol>
+        </section>
+
+        <section id="contatti">
+            <h2>Contatti</h2>
+            <div class="profile-box">
+                <div class="profile-header">
+                    <img src="https://cdn.phototourl.com/free/2026-06-11-316daf35-541e-4668-96e7-2864b5d24ca0.png" alt="Ritratto di Davide Curto" class="profile-img">
+                    <h3>chi sono</h3>
+                </div>
+                <p>Ciao, sono Davide Curto e questo sito è parte della mia tesi di laurea in design alla Sapienza. Ho avuto il piacere di conoscere il modello DADA attraverso la sua co-fondatrice, la dottoressa Lidia Cangemi, presso la scuola "Di Vittorio" di Ladispoli. L'idea degli ambienti DADA mi è subito sembrata un modo di interpretare spazi e oggetti in linea con i principi del design. Mi sono detto allora "perché non aiutare i docenti nel pensare meglio gli spazi di apprendimento?" Ho quindi condotto un workshop laboratoriale presso il "Di Vittorio" e ho deciso di condividere strumenti utili attraverso questo sito, in modo che ogni docente possa diventare il progettista del proprio ambiente di apprendimento.</p>
+                
+                <h3 style="margin-top: 25px;">dove puoi trovarmi</h3>
+                <p>Se sei interessato a visionare il mio percorso accademico e gli altri progetti, visita il mio spazio digitale:</p>
+                <a href="https://davidecu.github.io/Portfolio-Davide-Curto/" target="_blank" class="portfolio-link">Esplora il mio Portfolio &rarr;</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Ecosistema Co-DADA © 2026 - Tesi di Laurea in Design. Sapienza Università di Roma.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('main section');
+
+            function changeActiveLink() {
+                let index = sections.length;
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+                links.forEach((link) => link.classList.remove('active'));
+                if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 20) {
+                    links[links.length - 1].classList.add('active');
+                } else if (window.scrollY > 150) {
+                    links[index].classList.add('active');
+                }
+            }
+
+            changeActiveLink();
+            window.addEventListener('scroll', changeActiveLink);
+        });
+    </script>
+</body>
+</html>
